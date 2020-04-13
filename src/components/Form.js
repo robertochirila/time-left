@@ -18,7 +18,8 @@ export class Form extends Component {
         this.setState({
             step: 1,
             presentDate: "",
-            futureDate: ""
+            futureDate: "",
+            result: ""
         })
     }
 
