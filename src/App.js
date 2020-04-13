@@ -6,7 +6,6 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>Calculate how much time you have left on this planet</h1>
       </header>
       <Form />
     </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { PresentDate } from './PresentDate'
 import { FutureDate } from './FutureDate'
+import { Result } from './Result'
 
 export class Form extends Component {
     constructor(props) {
@@ -13,40 +14,46 @@ export class Form extends Component {
         }
     }
 
-    handleChange = (e) => {
+    retry = () => {
+        this.setState({
+            step: 1,
+            presentDate: "",
+            futureDate: ""
+        })
+    }
 
+    handleChange = input => e => {
 
         e.preventDefault()
         console.log(e.target.name)
-        this.setState({ [e.target.name]: e.target.value })
-
-
-    }
-
-    handleSubmit = (e) => {
-
-        e.preventDefault()
-        const { presentDate, futureDate } = this.state
-
-        const result = futureDate - presentDate
-        console.log(result)
-
-        console.log(e.target.name)
+        this.setState({ [input]: e.target.value })
 
     }
 
-    nextStep = (e) => {
+    previousStep = () => {
 
         const { step } = this.state
+        this.setState({ step: step - 1 })
 
-        e.preventDefault()
+    }
+
+    nextStep = () => {
+
+        const { step } = this.state
         this.setState({ step: step + 1 })
 
     }
 
+    makeCalculation = () => {
+        const { presentDate, futureDate } = this.state
+        const result = futureDate - presentDate
+        this.setState({ result: result })
+    }
+
 
     render() {
-        const { step } = this.state
+        const { step, presentDate, futureDate, result } = this.state
+
 
         switch (step) {
             case 1:
@@ -55,13 +62,26 @@ export class Form extends Component {
                         <PresentDate
                             nextStep={this.nextStep}
                             handleChange={this.handleChange}
-
+                            presentDate={presentDate}
                         />
                     </React.Fragment>
                 )
             case 2:
                 return (
-                    <FutureDate />
+                    <FutureDate
+                        nextStep={this.nextStep}
+                        previousStep={this.previousStep}
+                        handleChange={this.handleChange}
+                        futureDate={futureDate}
+                    />
+                )
+            case 3:
+                return (
+                    <Result
+                        makeCalculation={this.makeCalculation}
+                        result={result}
+                        retry={this.retry}
+                    />
                 )
         }
     }

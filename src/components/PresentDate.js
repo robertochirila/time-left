@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Result } from './FutureDate'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui/AppBar'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 export class PresentDate extends Component {
 
@@ -15,13 +18,21 @@ export class PresentDate extends Component {
         const { presentDate } = this.props
 
         return (
-            <div>
-                <label>
-                    What is your current age ?
-                    <input type="text" placeholder="Years old..." value={presentDate} onChange={this.props.handleChange} name="presentDate"></input>
-                </label>
-                <button type="Submit" onClick={this.continue}> Submit </button>
-            </div>
+            <MuiThemeProvider>
+                <React.Fragment>
+                    <AppBar title="Calculate how much time you have left on this planet" />
+                    <TextField
+                        hintText="How old are you ?"
+                        floatingLabelText="Your age"
+                        onChange={this.props.handleChange("presentDate")}
+                        defaultValue={presentDate} />
+                    <RaisedButton
+                        label="Continue"
+                        primary={true}
+                        onClick={this.continue}
+                    />
+                </React.Fragment>
+            </MuiThemeProvider>
         )
     }
 }
