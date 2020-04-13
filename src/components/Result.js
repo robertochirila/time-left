@@ -22,11 +22,15 @@ export class Result extends Component {
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title="Result" />
-                    <RaisedButton
-                        label="Calculate"
-                        primary={true}
-                        onClick={this.calculate}
-                    />
+                    {
+                        result == "" ?
+                            <RaisedButton
+                                label="Calculate"
+                                primary={true}
+                                onClick={this.calculate}
+                            />
+                            : ""
+                    }
 
                     {result != "" ?
 
