@@ -6,9 +6,18 @@ import AppBar from 'material-ui/AppBar'
 
 export class Result extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            flag: false
+        }
+    }
+
     calculate = (e) => {
+        const { flag } = this.state
         e.preventDefault()
         this.props.makeCalculation()
+        this.setState({ flag: !flag })
     }
 
     retry = (e) => {
@@ -18,35 +27,49 @@ export class Result extends Component {
 
     render() {
         const { result } = this.props
+        const { flag } = this.state
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title="Result" />
-                    {
-                        result == "" ?
+                    <div>
+                        {
+                            result == "" ?
+                                <RaisedButton
+                                    style={buttonStyle}
+                                    label="Calculate"
+                                    primary={true}
+                                    onClick={this.calculate}
+                                />
+                                : ""
+                        }
+
+                        {result != "" ?
+
                             <RaisedButton
-                                label="Calculate"
+                                style={buttonStyle}
+                                label="Retry"
                                 primary={true}
-                                onClick={this.calculate}
-                            />
-                            : ""
+                                onClick={this.retry}
+                            /> : ''}
+                    </div>
+                    {
+                        flag == true ?
+                            <label>
+                                The result is: {result}
+                            </label>
+                            :
+                            <div></div>
                     }
 
-                    {result != "" ?
-
-                        <RaisedButton
-                            label="Retry"
-                            primary={true}
-                            onClick={this.retry}
-                        /> : ''}
-
-                    <label>
-                        The result is: {result}
-                    </label>
                 </React.Fragment>
             </MuiThemeProvider>
         )
     }
+}
+
+const buttonStyle = {
+    margin: "2rem"
 }
 
 export default Result

@@ -27,20 +27,28 @@ export class FutureDate extends Component {
                         floatingLabelText="Future age"
                         onChange={this.props.handleChange("futureDate")}
                         defaultValue={futureDate} />
-                    <RaisedButton
-                        label="Continue"
-                        primary={true}
-                        onClick={this.continue}
-                    />
-                    <RaisedButton
-                        label="Previous"
-                        primary={true}
-                        onClick={this.previous}
-                    />
+                    <div>
+                        <RaisedButton
+                            label="Continue"
+                            primary={true}
+                            onClick={this.continue}
+                        />
+                        <RaisedButton
+                            style={buttonStyle}
+                            label="Previous"
+                            primary={true}
+                            onClick={this.previous}
+                        />
+                    </div>
                 </React.Fragment>
             </MuiThemeProvider>
         )
     }
+}
+
+const buttonStyle = {
+    marginLeft: "2rem",
+    marginRight: "2rem"
 }
 
 export default FutureDate

@@ -26,15 +26,23 @@ export class PresentDate extends Component {
                         floatingLabelText="Your age"
                         onChange={this.props.handleChange("presentDate")}
                         defaultValue={presentDate} />
-                    <RaisedButton
-                        label="Continue"
-                        primary={true}
-                        onClick={this.continue}
-                    />
+                    <div>
+                        <RaisedButton
+                            style={buttonStyle}
+                            label="Continue"
+                            primary={true}
+                            onClick={this.continue}
+                        />
+                    </div>
                 </React.Fragment>
             </MuiThemeProvider>
         )
     }
+}
+
+const buttonStyle = {
+    marginLeft: "2rem",
+    marginRight: "2rem"
 }
 
 export default PresentDate

@@ -26,7 +26,6 @@ export class Form extends Component {
     handleChange = input => e => {
 
         e.preventDefault()
-        console.log(e.target.name)
         this.setState({ [input]: e.target.value })
 
     }
